@@ -21,6 +21,8 @@ disp("fun: global_parameter");
     glo_cell.param.pointA =0;
     
     glo_cell.param.physical_cell_identity.nid = 3*glo_cell.param.physical_cell_identity.nid1 + glo_cell.param.physical_cell_identity.nid2;
+    
+    % refer to 38.211
     glo_cell.param.subframe.slots = power(2, glo_cell.param.subframe.u);
     glo_cell.param.subframe.symobls =  glo_cp_mode.normal_cp * glo_cell.param.subframe.slots;
    

@@ -6,13 +6,13 @@ disp("decode_pbch");
 % 432 symol data from SSB
 
 v_pbch_dec_modulated_data =  pbch_data;
-v_pbch_dec_scrambled2_data = pbch_demodulation(v_pbch_dec_modulated_data);
-v_pbch_dec_rate_matching_data = pbch_descrambling_2(v_pbch_dec_scrambled2_data);
-v_pbch_dec_polarred_data = pbch_dec_rate_matching(v_pbch_dec_rate_matching_data)
-v_pbch_dec_crc24_data = pbch_dec_polar(v_pbch_dec_polarred_data)
-v_pbch_dec_scrambled1_data = pbch_dec_crc24c(v_pbch_dec_crc24_data);
-v_pbch_dec_payload_data = pbch_descrambling_1(v_pbch_dec_scrambled1_data);
-v_decoded_pbch_content = pbch_dec_payload(v_pbch_dec_payload_data);
+v_pbch_dec_scrambled2_data = pbch_demodulation(v_pbch_modulated_data);
+v_pbch_dec_rate_matching_data = pbch_descrambling_2(v_pbch_scrambled2_data)
+v_pbch_polarred_data = pbch_dec_rate_matching(v_pbch_rate_matching_data);
+v_pbch_crc24_data = pbch_dec_polar(v_pbch_polarred_data);
+v_pbch_scrambled1_data = pbch_dec_crc24c(v_pbch_crc24_data);
+v_pbch_payload_data = pbch_descrambling_1(v_pbch_scrambled1_data);
+v_decoded_pbch_content = pbch_dec_payload(v_pbch_payload_data);
 
 decoded_pbch_content =v_decoded_pbch_content;
 
@@ -104,7 +104,7 @@ N = length(F);                    % Mother code block length
 pbch_polarDec = h5gPolarDecoder(N,K,F,L,crcLen,'DeinterleaveOutput',iIL);
 
 % Polar decode
-v_pbch_polar_decoded_data = pbch_polarDec(pbch_polarred_data);
+v_pbch_polar_decoded_data = pbch_polarDec(pbch_polarred_data');
 
 pbch_polar_decoded_data = v_pbch_polar_decoded_data';
 end
